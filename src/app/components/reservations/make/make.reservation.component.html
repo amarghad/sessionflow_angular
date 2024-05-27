@@ -1,0 +1,17 @@
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold mb-6">Select a Session</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+    <!-- Loop through sessions and display as cards -->
+    <div *ngFor="let session of sessions" [ngClass]="{'ring-2 ring-blue-600 border-blue-600' : selectedSession == session.id}" class="transition bg-white rounded-lg border p-4 cursor-pointer" (click)="selectSession(session.id)">
+      <!-- Use hidden radio buttons to manage selection -->
+      <input type="radio" id="session{{ session.id }}" name="selectedSession" [value]="session.id" class="hidden">
+
+      <h1 class="text-xl font-bold mb-1">Le {{ session.date | date }}</h1>
+      <p class="text-gray-700 text-sm mb-3">Du {{ session.start }} à {{ session.end }}</p>
+      <ul>
+        <li *ngFor="let member of session.juryMembers">{{ member.name }}</li>
+      </ul>
+    </div>
+  </div>
+  <button class="text-sm font-medium rounded-md border border-blue-600 hover:border-blue-800 bg-blue-600 hover:bg-blue-800 text-white py-2 transition px-4 mt-4" (click)="submitSession()">Réserver maintenant</button>
+</div>
